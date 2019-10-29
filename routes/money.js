@@ -14,10 +14,10 @@ const saltRounds = 10;
 
 router.post('/add/', async (request, response) => {
     try {
-        let user = await findInCollection(dsn, "account", {}, {}, 3, request.body.email);
+        let user = await findInCollection(dsn, "user", {}, {}, 3, request.body.email);
         let money = parseInt(request.body.money) + parseInt(user[0].amount);
         console.log(money)
-        let res = await updateInCollection(dsn, "account", {}, {}, 3, [request.body.email, money]);
+        let res = await updateInCollection(dsn, "user", {}, {}, 3, [request.body.email, money]);
 
         response.json(res);
     } catch (err) {
@@ -27,7 +27,7 @@ router.post('/add/', async (request, response) => {
 
 router.post('/get/', async (request, response) => {
     try {
-        let user = await findInCollection(dsn, "account", {}, {}, 3, request.body.email);
+        let user = await findInCollection(dsn, "user", {}, {}, 3, request.body.email);
 
         response.json(user);
     } catch (err) {

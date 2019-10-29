@@ -53,10 +53,10 @@ router.post('/buy/', async (request, response) => {
     let params = [request.body.email, request.body.company, request.body.amount, request.body.price, 'Buy'];
 
     try {
-        let user = await findInCollection(dsn, "account", {}, {}, 3, request.body.email);
+        let user = await findInCollection(dsn, "user", {}, {}, 3, request.body.email);
         let res = await insertInCollection(dsn, "stocks", {}, {}, 0, params);
         let amount = user[0].amount - (request.body.amount * request.body.price);
-        await updateInCollection(dsn, "account", {}, {}, 3, [request.body.email, amount]);
+        await updateInCollection(dsn, "user", {}, {}, 3, [request.body.email, amount]);
 
         response.json(res);
     } catch (err) {
@@ -68,10 +68,10 @@ router.post('/sell/', async (request, response) => {
     let params = [request.body.email, request.body.company, request.body.amount, request.body.price, 'Sell'];
 
     try {
-        let user = await findInCollection(dsn, "account", {}, {}, 3, request.body.email);
+        let user = await findInCollection(dsn, "user", {}, {}, 3, request.body.email);
         let res = await insertInCollection(dsn, "stocks", {}, {}, 0, params);
         let amount = user[0].amount + (request.body.amount * request.body.price);
-        await updateInCollection(dsn, "account", {}, {}, 3, [request.body.email, amount]);
+        await updateInCollection(dsn, "user", {}, {}, 3, [request.body.email, amount]);
 
         response.json(res);
     } catch (err) {

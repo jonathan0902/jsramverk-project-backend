@@ -19,7 +19,7 @@ router.post('/get/', async (request, response) => {
     const token = jwt.sign(payload, secret, { expiresIn: '1h'});
 
     try {
-        let res = await findInCollection(dsn, "account", {}, {}, 3, request.body.email);
+        let res = await findInCollection(dsn, "user", {}, {}, 3, request.body.email);
 
         if(res === undefined || res.length == 0) {
             response.json({ message: "Username or Password didn't match.", status: "failed"});
@@ -43,7 +43,7 @@ router.post('/register/', async (request, response) => {
     params[1] = bcrypt.hashSync(request.body.password, salt);
 
     try {
-        let res = await insertInCollection(dsn, "account", {}, {}, 0, params);
+        let res = await insertInCollection(dsn, "user", {}, {}, 0, params);
 
         response.json(res);
     } catch (err) {
