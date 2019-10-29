@@ -102,12 +102,12 @@ router.post('/sell/', async (request, response) => {
         let data = await findInCollection(dsn, "stocks", {email: { $eq: request.body.email }, company: { $eq: request.body.company }}, {}, 0);
 
         for(let i = 0; i < data.length; i++) {
-            cta = parseInt(cta) + parseInt(data[i].amount)
-            console.log(parseInt(data[i].amount))
+            if(data[i].status == "Buy") {
+                cta = parseInt(cta) + parseInt(data[i].amount)
+            } else {
+                cta = parseInt(cta) - parseInt(data[i].amount)
+            }
         }
-
-        console.log(parseInt(request.body.amount))
-        console.log(cta)
 
         if(parseInt(request.body.amount) < cta ) {
             let res = await insertInCollection(dsn, "stocks", {}, {}, 0, params);
