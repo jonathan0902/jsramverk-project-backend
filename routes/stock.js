@@ -103,6 +103,7 @@ router.post('/sell/', async (request, response) => {
 
         for(let i = 0; i < data.length; i++) {
             cta = parseInt(cta) + parseInt(data[i].amount)
+            console.log(data[i])
         }
 
         console.log(parseInt(request.body.amount))
