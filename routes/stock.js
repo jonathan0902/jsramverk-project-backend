@@ -60,7 +60,7 @@ router.post('/buy/', async (request, response) => {
         if(amount > 0) {
             await updateInCollection(dsn, "user", {}, {}, 3, [request.body.email, amount]);
 
-            response.json({res: res, status: "true"});
+            response.json({status: "true"});
         }
 
         response.json({status: "false"});
