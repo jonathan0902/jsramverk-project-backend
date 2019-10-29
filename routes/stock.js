@@ -108,7 +108,7 @@ router.post('/sell/', async (request, response) => {
             cta = parseInt(cta) + parseInt(data[i].amount)
         }
 
-        if((cta - request.body.amount) > 0) {
+        if((cta - parseInt(request.body.amount)) > 0) {
             response.json({status: "true"});
         }
 
