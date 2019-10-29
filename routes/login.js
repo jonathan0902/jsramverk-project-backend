@@ -5,7 +5,7 @@
 
 // MongoDB
 const mongo = require("mongodb").MongoClient;
-const dsn =  process.env.DBWEBB_DSN || "mongodb://jhellberg.me:27017/jhellberg";
+const dsn =  process.env.DBWEBB_DSN || "mongodb://localhost:27017/jhellberg";
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
