@@ -101,14 +101,14 @@ router.post('/sell/', async (request, response) => {
         let amount = user[0].amount + (request.body.amount * request.body.price);
         await updateInCollection(dsn, "user", {}, {}, 3, [request.body.email, amount]);
 
-        let amount = 0;
+        let cta = 0;
         let data = await findInCollection(dsn, "stocks", {email: { $eq: request.body.email }, company: { $eq: request.body.company }}, {}, 0);
 
         for(let i = 0; i < data.length; i++) {
-            amount = parseInt(amount) + parseInt(data[i].amount)
+            cta = parseInt(cta) + parseInt(data[i].amount)
         }
 
-        if((data - request.body.amount) > 0) {
+        if((cta - request.body.amount) > 0) {
             response.json({status: "true"});
         }
 
