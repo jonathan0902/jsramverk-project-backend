@@ -48,7 +48,7 @@ router.post('/amount/', async (request, response) => {
             }
         }
 
-        response.json({amount, status: "success"});
+        response.json({amount: amount, status: "success"});
 
     } catch (err) {
         response.json(err);
