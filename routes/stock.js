@@ -105,6 +105,9 @@ router.post('/sell/', async (request, response) => {
             cta = parseInt(cta) + parseInt(data[i].amount)
         }
 
+        console.log(parseInt(request.body.amount))
+        console.log(cta)
+
         if(parseInt(request.body.amount) < cta ) {
             let res = await insertInCollection(dsn, "stocks", {}, {}, 0, params);
             let amount = user[0].amount + (request.body.amount * request.body.price);
