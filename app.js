@@ -9,7 +9,7 @@ const money = require('./routes/money');
 require('dotenv').config();
 
 const app = express();
-const port = 8333;
+const port = 8334;
 
 app.use(cors());
 app.use(bodyParser.json());
