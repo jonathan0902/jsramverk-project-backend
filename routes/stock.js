@@ -42,13 +42,13 @@ router.post('/amount/', async (request, response) => {
 
         for(let i = 0; i < res.length; i++) {
             if(res[i].status == "Buy") {
-                amount = amount + res[i].amount
+                amount = parseInt(amount) + parseInt(res[i].amount)
             } else {
-                amount = amount - res[i].amount
+                amount = parseInt(amount) - parseInt(res[i].amount)
             }
         }
 
-        response.json({res, status: "success"});
+        response.json({amount, status: "success"});
 
     } catch (err) {
         response.json(err);
