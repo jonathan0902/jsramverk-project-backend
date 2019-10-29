@@ -76,10 +76,10 @@ router.post('/buy/', async (request, response) => {
 
     try {
         let user = await findInCollection(dsn, "user", {}, {}, 3, request.body.email);
-        let res = await insertInCollection(dsn, "stocks", {}, {}, 0, params);
         let amount = user[0].amount - (request.body.amount * request.body.price);
 
-        if(amount > 0) {
+        if(amount < 0) {
+            await insertInCollection(dsn, "stocks", {}, {}, 0, params);
             await updateInCollection(dsn, "user", {}, {}, 3, [request.body.email, amount]);
 
             response.json({status: "true"});
