@@ -105,7 +105,7 @@ router.post('/sell/', async (request, response) => {
             cta = parseInt(cta) + parseInt(data[i].amount)
         }
 
-        if((cta - parseInt(request.body.amount)) < 0) {
+        if(parseInt(request.body.amount) < cta ) {
             let res = await insertInCollection(dsn, "stocks", {}, {}, 0, params);
             let amount = user[0].amount + (request.body.amount * request.body.price);
             await updateInCollection(dsn, "user", {}, {}, 3, [request.body.email, amount]);
