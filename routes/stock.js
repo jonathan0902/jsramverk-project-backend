@@ -33,6 +33,28 @@ router.post('/get/', async (request, response) => {
     }
 });
 
+router.post('/amount/', async (request, response) => {
+
+    try {
+        let res = await findInCollection(dsn, "stocks", {email: { $eq: request.body.email }, company: { $eq: request.body.company }}, {}, 0);
+
+        let amount = 0;
+
+        for(let i = 0; i < res.length; i++) {
+            if(res[i].status == "Buy") {
+                amount = amount + res[i].amount
+            } else {
+                amount = amount - res[i].amount
+            }
+        }
+
+        response.json({amount, status: "success"});
+
+    } catch (err) {
+        response.json(err);
+    }
+});
+
 router.post('/get/map/', async (request, response) => {
     let state = true;
     try {
